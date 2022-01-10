@@ -11,14 +11,3 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     show-sql: true
-
-bucket4j:
-  enabled: true
-  filters:
-    - cache-name: buckets
-      url: /*
-      rate-limits:
-        - bandwidths:
-            - capacity: 5
-              time: 10
-              unit: seconds

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class SurveyAppBackendApplication {
 
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     @ResponseBody
     String home() {
         return "Hello World!";
