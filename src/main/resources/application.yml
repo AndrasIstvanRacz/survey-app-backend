@@ -1,0 +1,19 @@
+server:
+  port : 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  datasource:
+    password: 5978c874
+    url: jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_aeb9de4114d3af6
+    username: bbf1e5cabb4ce1
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    show-sql: true
