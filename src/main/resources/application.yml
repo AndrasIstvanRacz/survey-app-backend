@@ -11,3 +11,5 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     show-sql: true
+jwt:
+  secret: q+\DFC/2{Nm)6~uAdhtcY=(wY>[ptJNRhN\A(s,MYLqsa[Hx}{^*7>XZ3r3V*@+,qZYH!a5aP*PSc2*^H;$={K+RV,2_2y]}3/cP)Pm:G^gS{h@z"=VV&y#Hv_HKsa$3TAGHN:B)[qGKR)hN2n]8n_FBB9Afw'bkXFCj`y`QaY)hCtM}^nEEyH9v=5JmhG#%na2Y\"DhKzU>&4%FeFMjG-_p)AAQ+x({b*c#!/rQpCv#'5=T~JpJ5[,P!JLbgYz2
