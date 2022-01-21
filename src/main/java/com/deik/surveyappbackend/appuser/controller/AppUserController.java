@@ -23,6 +23,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins="https://survey-app-backend-deik.herokuapp.com")
 @RequiredArgsConstructor
 public class AppUserController {
 
