@@ -23,7 +23,6 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins="http://localhost:3000")
 @RequiredArgsConstructor
 public class AppUserController {
 
