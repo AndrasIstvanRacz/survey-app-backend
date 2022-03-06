@@ -6,7 +6,8 @@ import com.deik.surveyappbackend.appuser.request.AppUserRegistrationRequest;
 import com.deik.surveyappbackend.appuser.service.AppUserService;
 import com.deik.surveyappbackend.appuser.entity.AppUser;
 import com.deik.surveyappbackend.appuser.service.AppUserServiceImplementation;
-import com.deik.surveyappbackend.util.JwtUtil;
+
+import com.deik.surveyappbackend.jwt.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;

@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class NewSurveyRequest {
+    private Long id;
     private String newTitle;
     private String newDescription;
     private Boolean newVisibility;

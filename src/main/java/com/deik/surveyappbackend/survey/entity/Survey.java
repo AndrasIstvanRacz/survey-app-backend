@@ -3,14 +3,12 @@ package com.deik.surveyappbackend.survey.entity;
 
 import com.deik.surveyappbackend.appuser.entity.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
 
 
 @Entity
@@ -23,6 +21,7 @@ public class Survey{
     private Long survey_id;
     private String title;
     private String description;
+    @Column(nullable = false)
     private Boolean visibility;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "username")

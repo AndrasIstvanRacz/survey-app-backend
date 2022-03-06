@@ -1,4 +1,4 @@
-package com.deik.surveyappbackend.util;
+package com.deik.surveyappbackend.jwt.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtUtil {
+public class JwtUtil{
 
     @Value("${jwt.secret}")
     private String SECRET_KEY;

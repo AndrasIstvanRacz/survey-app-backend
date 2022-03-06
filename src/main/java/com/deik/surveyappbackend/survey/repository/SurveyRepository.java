@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
-import java.util.UUID;
+
 
 @Repository
 public interface SurveyRepository extends JpaRepository<Survey, Long>{
@@ -21,9 +21,6 @@ public interface SurveyRepository extends JpaRepository<Survey, Long>{
             "from Survey as s " +
             "where s.visibility = true")
     List<SurveyProjection> findAllByVisibility();
-
-    @Override
-    Survey getById(Long aLong);
 
     @Query("select s.survey_id as id, " +
             "s.title as title, " +
