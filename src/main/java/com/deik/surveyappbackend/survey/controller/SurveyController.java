@@ -2,15 +2,13 @@ package com.deik.surveyappbackend.survey.controller;
 
 import com.deik.surveyappbackend.appuser.entity.AppUser;
 import com.deik.surveyappbackend.appuser.repository.AppUserRepository;
-import com.deik.surveyappbackend.appuser.service.AppUserServiceImplementation;
 import com.deik.surveyappbackend.jwt.util.JwtUtil;
 import com.deik.surveyappbackend.survey.entity.Answer;
-import com.deik.surveyappbackend.survey.entity.Question;
 import com.deik.surveyappbackend.survey.entity.Survey;
 import com.deik.surveyappbackend.survey.projections.SurveyProjection;
+import com.deik.surveyappbackend.survey.repository.AnswerRepository;
 import com.deik.surveyappbackend.survey.repository.SurveyRepository;
 import com.deik.surveyappbackend.survey.request.NewSurveyRequest;
-import com.deik.surveyappbackend.survey.request.QuestionRequest;
 import com.deik.surveyappbackend.survey.service.SurveyService;
 
 import io.jsonwebtoken.SignatureException;
@@ -31,6 +29,7 @@ public class SurveyController {
     private final JwtUtil jwtUtil;
     private final AppUserRepository appUserRepository;
     private final SurveyRepository surveyRepository;
+    private final AnswerRepository answerRepository;
 
     @GetMapping("/findAllVisible")
     public ResponseEntity<List<SurveyProjection>> findAllVisible() {
@@ -156,5 +155,17 @@ public class SurveyController {
 
         surveyRepository.deleteById(surveyId);
         return ResponseEntity.status(HttpStatus.OK).body("Survey deleted from the database");
+    }
+
+    @PostMapping("/saveAnswers")
+    public ResponseEntity<String> saveAnswers(@RequestBody List<Long> chosenAnswers) {
+
+        for (Long i: chosenAnswers) {
+            Answer answer = answerRepository.getById(i);
+            answer.setPicked(answer.getPicked() + 1);
+            answerRepository.save(answer);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Answers saved");
+
     }
 }
