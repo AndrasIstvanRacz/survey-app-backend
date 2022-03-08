@@ -17,7 +17,8 @@ public interface SurveyRepository extends JpaRepository<Survey, Long>{
 
     @Query("select s.survey_id as id, " +
             "s.title as title, " +
-            "s.description as description " +
+            "s.description as description, " +
+            "s.appUser.username as username " +
             "from Survey as s " +
             "where s.visibility = true")
     List<SurveyProjection> findAllByVisibility();
