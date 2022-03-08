@@ -6,4 +6,5 @@ public interface SurveyProjection {
     Long getId();
     String getTitle();
     String getDescription();
+    String getUsername();
 }
