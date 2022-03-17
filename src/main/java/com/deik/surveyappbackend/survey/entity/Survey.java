@@ -4,6 +4,7 @@ package com.deik.surveyappbackend.survey.entity;
 import com.deik.surveyappbackend.appuser.entity.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,9 +17,10 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "appUser"})
 public class Survey{
 
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long survey_id;
+    @GeneratedValue(generator = "UUID")
+    private String survey_id;
     private String title;
     private String description;
     @Column(nullable = false)

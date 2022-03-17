@@ -38,7 +38,8 @@ public class SurveyController {
 
 
     @GetMapping("/getByIdWithoutAuth")
-    public ResponseEntity<Survey> getByIdWithoutAuth(@RequestBody Long surveyId) {
+    public ResponseEntity<Survey> getByIdWithoutAuth(@RequestBody String surveyId) {
+        System.out.println(surveyId);
         Survey surveyById = surveyRepository.getById(surveyId);
 
         if(surveyById.getVisibility())
@@ -50,7 +51,7 @@ public class SurveyController {
 
     @GetMapping("/getByIdWithAuth")
     public ResponseEntity<Survey> getByIdWithAuth(@RequestHeader("Authorization") String authorizationHeader,
-                                                  @RequestBody Long surveyId) {
+                                                  @RequestBody String surveyId) {
         String surveyCreatorUsername;
         String token = authorizationHeader.substring(7);
 
@@ -139,7 +140,7 @@ public class SurveyController {
 
     @PostMapping("/deleteById")
     public ResponseEntity<String> deleteById(@RequestHeader("Authorization") String authorizationHeader,
-                                             @RequestBody Long surveyId) {
+                                             @RequestBody String surveyId) {
         String usernameFromToken;
         String token = authorizationHeader.substring(7);
         try {

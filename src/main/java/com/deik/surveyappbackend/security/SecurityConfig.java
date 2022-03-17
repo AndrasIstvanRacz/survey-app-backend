@@ -52,7 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/survey/getByIdWithoutAuth",
                         "/survey/findAllVisible",
-                        "/user/*")
+                        "/survey/saveAnswers",
+                        "/user/registration",
+                        "/user/authenticate")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()

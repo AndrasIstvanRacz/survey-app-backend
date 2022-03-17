@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Repository
-public interface SurveyRepository extends JpaRepository<Survey, Long>{
+public interface SurveyRepository extends JpaRepository<Survey, String>{
 
     @Query("select s.survey_id as id, " +
             "s.title as title, " +
@@ -25,7 +25,8 @@ public interface SurveyRepository extends JpaRepository<Survey, Long>{
 
     @Query("select s.survey_id as id, " +
             "s.title as title, " +
-            "s.description as description " +
+            "s.description as description, " +
+            "s.appUser.username as username " +
             "from Survey as s " +
             "where s.appUser = ?1")
     List<SurveyProjection> findAllByAppUser(AppUser appUser);
