@@ -8,7 +8,9 @@ import com.deik.surveyappbackend.survey.entity.Survey;
 import com.deik.surveyappbackend.survey.projections.SurveyProjection;
 import com.deik.surveyappbackend.survey.repository.AnswerRepository;
 import com.deik.surveyappbackend.survey.repository.SurveyRepository;
+import com.deik.surveyappbackend.survey.request.AnswersIdRequest;
 import com.deik.surveyappbackend.survey.request.NewSurveyRequest;
+import com.deik.surveyappbackend.survey.request.SurveyIdRequest;
 import com.deik.surveyappbackend.survey.service.SurveyService;
 
 import io.jsonwebtoken.SignatureException;
@@ -38,9 +40,8 @@ public class SurveyController {
 
 
     @GetMapping("/getByIdWithoutAuth")
-    public ResponseEntity<Survey> getByIdWithoutAuth(@RequestBody String surveyId) {
-        System.out.println(surveyId);
-        Survey surveyById = surveyRepository.getById(surveyId);
+    public ResponseEntity<Survey> getByIdWithoutAuth(@RequestBody SurveyIdRequest surveyId) {
+        Survey surveyById = surveyRepository.getById(surveyId.getId());
 
         if(surveyById.getVisibility())
             return ResponseEntity.status(HttpStatus.OK).body(surveyById);
@@ -51,7 +52,7 @@ public class SurveyController {
 
     @GetMapping("/getByIdWithAuth")
     public ResponseEntity<Survey> getByIdWithAuth(@RequestHeader("Authorization") String authorizationHeader,
-                                                  @RequestBody String surveyId) {
+                                                  @RequestBody SurveyIdRequest surveyId) {
         String surveyCreatorUsername;
         String token = authorizationHeader.substring(7);
 
@@ -61,7 +62,7 @@ public class SurveyController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        Survey surveyById = surveyRepository.getById(surveyId);
+        Survey surveyById = surveyRepository.getById(surveyId.getId());
 
         if(surveyCreatorUsername.equals(surveyById.getAppUser().getUsername()))
             return ResponseEntity.status(HttpStatus.OK).body(surveyById);
@@ -140,7 +141,7 @@ public class SurveyController {
 
     @PostMapping("/deleteById")
     public ResponseEntity<String> deleteById(@RequestHeader("Authorization") String authorizationHeader,
-                                             @RequestBody String surveyId) {
+                                             @RequestBody SurveyIdRequest surveyId) {
         String usernameFromToken;
         String token = authorizationHeader.substring(7);
         try {
@@ -148,20 +149,20 @@ public class SurveyController {
         }catch(SignatureException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        String surveyOwner = surveyRepository.getById(surveyId).getAppUser().getUsername();
+        String surveyOwner = surveyRepository.getById(surveyId.getId()).getAppUser().getUsername();
         System.out.println(surveyOwner);
         System.out.println(usernameFromToken);
         if(!usernameFromToken.equals(surveyOwner))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
-        surveyRepository.deleteById(surveyId);
+        surveyRepository.deleteById(surveyId.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Survey deleted from the database");
     }
 
     @PostMapping("/saveAnswers")
-    public ResponseEntity<String> saveAnswers(@RequestBody List<Long> chosenAnswers) {
+    public ResponseEntity<String> saveAnswers(@RequestBody AnswersIdRequest pickedAnswers) {
 
-        for (Long i: chosenAnswers) {
+        for (Long i: pickedAnswers.getPickedAnswers()) {
             Answer answer = answerRepository.getById(i);
             answer.setPicked(answer.getPicked() + 1);
             answerRepository.save(answer);
