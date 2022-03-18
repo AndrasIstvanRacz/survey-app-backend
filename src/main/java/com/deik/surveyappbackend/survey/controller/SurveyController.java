@@ -158,7 +158,7 @@ public class SurveyController {
     }
 
     @PostMapping("/saveAnswers")
-    public ResponseEntity<String> saveAnswers(@RequestParam List<Long> pickedAnswers) {
+    public ResponseEntity<String> saveAnswers(@RequestBody List<Long> pickedAnswers) {
 
         for (Long i: pickedAnswers) {
             Answer answer = answerRepository.getById(i);
