@@ -9,6 +9,7 @@ import com.deik.surveyappbackend.survey.projections.SurveyProjection;
 import com.deik.surveyappbackend.survey.repository.AnswerRepository;
 import com.deik.surveyappbackend.survey.repository.SurveyRepository;
 import com.deik.surveyappbackend.survey.request.NewSurveyRequest;
+import com.deik.surveyappbackend.survey.request.SaveAnswerRequest;
 import com.deik.surveyappbackend.survey.service.SurveyService;
 
 import io.jsonwebtoken.SignatureException;
@@ -158,9 +159,9 @@ public class SurveyController {
     }
 
     @PostMapping("/saveAnswers")
-    public ResponseEntity<String> saveAnswers(@RequestBody List<Long> pickedAnswers) {
+    public ResponseEntity<String> saveAnswers(@RequestBody SaveAnswerRequest pickedAnswers) {
 
-        for (Long i: pickedAnswers) {
+        for (Long i: pickedAnswers.getPickedAnswers()) {
             Answer answer = answerRepository.getById(i);
             answer.setPicked(answer.getPicked() + 1);
             answerRepository.save(answer);
