@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000/")
+@CrossOrigin
 @RequestMapping("/survey")
 @RequiredArgsConstructor
 public class SurveyController {
