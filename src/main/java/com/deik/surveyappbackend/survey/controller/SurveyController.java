@@ -138,7 +138,7 @@ public class SurveyController {
         }
     }
 
-    @PostMapping("/deleteById")
+    @DeleteMapping("/deleteById")
     public ResponseEntity<String> deleteById(@RequestHeader("Authorization") String authorizationHeader,
                                              @RequestParam String surveyId) {
         String usernameFromToken;
