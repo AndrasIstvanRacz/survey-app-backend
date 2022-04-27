@@ -48,6 +48,12 @@ public class SurveyController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
+    @GetMapping("/getByIdFormShare")
+    public ResponseEntity<Survey> getByIdFormShare(@RequestParam String surveyId) {
+        Survey surveyById = surveyRepository.getById(surveyId);
+        return ResponseEntity.status(HttpStatus.OK).body(surveyById);
+    }
+
 
     @GetMapping("/getByIdWithAuth")
     public ResponseEntity<Survey> getByIdWithAuth(@RequestHeader("Authorization") String authorizationHeader,
