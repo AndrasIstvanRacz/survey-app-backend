@@ -17,8 +17,8 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "appUser"})
 public class Survey{
 
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Id
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "UUID")
     private String survey_id;
     private String title;

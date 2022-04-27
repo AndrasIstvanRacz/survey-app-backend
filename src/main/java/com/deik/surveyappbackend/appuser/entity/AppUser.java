@@ -1,7 +1,6 @@
 package com.deik.surveyappbackend.appuser.entity;
 
 import com.deik.surveyappbackend.survey.entity.Survey;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;

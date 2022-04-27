@@ -35,10 +35,13 @@ public class AppUserController {
     private final AppUserRepository appUserRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
 
+
     @PostMapping("/registration")
     public ResponseEntity<String>saveUser(@RequestBody AppUserRegistrationRequest newUser){
         if(appUserRepository.findByUsername(newUser.getUsername()) != null)
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Username already exists");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_ACCEPTABLE)
+                    .body("Username already exists");
 
         AppUser newAppUser = new AppUser();
 
@@ -62,7 +65,8 @@ public class AppUserController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AppUserAuthRequest authenticationRequest)  {
+    public ResponseEntity<?> createAuthenticationToken(
+            @RequestBody AppUserAuthRequest authenticationRequest)  {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -70,11 +74,13 @@ public class AppUserController {
                             authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Incorrect username or password");
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                    .body("Incorrect username or password");
         }
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
 
-        return ResponseEntity.status(HttpStatus.OK).body(jwtUtil.generateToken(userDetails));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(jwtUtil.generateToken(userDetails));
     }
 }
