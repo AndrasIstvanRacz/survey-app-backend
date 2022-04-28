@@ -55,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/survey/findAllVisible",
                         "/survey/saveAnswers",
                         "/user/registration",
-                        "/user/authenticate")
+                        "/user/authenticate",
+                        "/survey/getByIdFormShare")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()
