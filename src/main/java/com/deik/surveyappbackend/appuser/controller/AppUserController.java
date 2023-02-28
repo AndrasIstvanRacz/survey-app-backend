@@ -35,7 +35,7 @@ public class AppUserController {
     private final AppUserRepository appUserRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
 
-
+    @CrossOrigin
     @PostMapping("/registration")
     public ResponseEntity<String>saveUser(@RequestBody AppUserRegistrationRequest newUser){
         if(appUserRepository.findByUsername(newUser.getUsername()) != null)
@@ -64,6 +64,7 @@ public class AppUserController {
         return ResponseEntity.created(uri).body(jwtUtil.generateToken(userDetails));
     }
 
+    @CrossOrigin
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(
             @RequestBody AppUserAuthRequest authenticationRequest)  {
