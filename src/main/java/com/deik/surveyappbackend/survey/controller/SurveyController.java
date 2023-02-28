@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/survey")
 @RequiredArgsConstructor
 public class SurveyController {
@@ -32,13 +31,11 @@ public class SurveyController {
     private final SurveyRepository surveyRepository;
     private final AnswerRepository answerRepository;
 
-    @CrossOrigin
     @GetMapping("/findAllVisible")
     public ResponseEntity<List<SurveyProjection>> findAllVisible() {
         return ResponseEntity.status(HttpStatus.OK).body(surveyRepository.findAllByVisibility());
     }
 
-    @CrossOrigin
     @GetMapping("/getByIdWithoutAuth")
     public ResponseEntity<Survey> getByIdWithoutAuth(@RequestParam String surveyId) {
         Survey surveyById = surveyRepository.getById(surveyId);
@@ -49,14 +46,12 @@ public class SurveyController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @CrossOrigin
     @GetMapping("/getByIdFormShare")
     public ResponseEntity<Survey> getByIdFormShare(@RequestParam String surveyId) {
         Survey surveyById = surveyRepository.getById(surveyId);
         return ResponseEntity.status(HttpStatus.OK).body(surveyById);
     }
 
-    @CrossOrigin
     @GetMapping("/getByIdWithAuth")
     public ResponseEntity<Survey> getByIdWithAuth(@RequestHeader("Authorization") String authorizationHeader,
                                                   @RequestParam String surveyId) {
@@ -77,7 +72,6 @@ public class SurveyController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @CrossOrigin
     @GetMapping("/findAllByUsername")
     public ResponseEntity<List<SurveyProjection>> findAllByUsername(@RequestHeader("Authorization") String authorizationHeader) {
         String token = authorizationHeader.substring(7);
@@ -94,7 +88,6 @@ public class SurveyController {
         return ResponseEntity.status(HttpStatus.OK).body(surveyRepository.findAllByAppUser(surveyCreator));
     }
 
-    @CrossOrigin
     @PostMapping("/addNew")
     public ResponseEntity<String> addNew(@RequestHeader("Authorization") String authorizationHeader,
                                          @RequestBody NewSurveyRequest surveyRequest) {
@@ -117,7 +110,6 @@ public class SurveyController {
         }
     }
 
-    @CrossOrigin
     @PostMapping("/update")
     public ResponseEntity<String> update(@RequestHeader("Authorization") String authorizationHeader,
                                          @RequestBody NewSurveyRequest surveyRequest) {
@@ -147,7 +139,6 @@ public class SurveyController {
         }
     }
 
-    @CrossOrigin
     @DeleteMapping("/deleteById")
     public ResponseEntity<String> deleteById(@RequestHeader("Authorization") String authorizationHeader,
                                              @RequestParam String surveyId) {
@@ -168,7 +159,6 @@ public class SurveyController {
         return ResponseEntity.status(HttpStatus.OK).body("Survey deleted from the database");
     }
 
-    @CrossOrigin
     @PostMapping("/saveAnswers")
     public ResponseEntity<String> saveAnswers(@RequestBody SaveAnswerRequest pickedAnswers) {
 
